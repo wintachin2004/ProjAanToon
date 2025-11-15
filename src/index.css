@@ -1,0 +1,103 @@
+/*
+  Global CSS
+  - Uses Tailwind directives for utility classes.
+  - This file also defines light overrides and a small set of global element styles
+    used across the demo app (buttons, inputs, base font).
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme indicates the preferred default scheme; we keep light/dark support */
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Link color (default) — components use Tailwind, but this ensures fallback color */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+/* Body layout: keep app full-height and prevent content from being squished */
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* Global button styling tuned to the pastel theme.
+   Note: !important is used to ensure consistent appearance across Tailwind utility classes
+   without modifying component code. If you prefer more specific targeting, replace these
+   selectors with a dedicated class. */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  /* Pastel blue button background (overrides component classes to keep consistent look) */
+  background-color: #99D1FF !important;
+  color: #021124 !important;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  /* Slightly darker pastel on hover */
+  background-color: #66ADFF !important;
+  border-color: rgba(0,0,0,0.06);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Comment textarea: force white background and dark text for readability */
+textarea {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid rgba(16,24,40,0.08) !important;
+}
+
+/* Make input fields (search/login) slightly softened to fit the pastel theme */
+input[type="text"], input[type="password"], input[type="search"] {
+  background-color: #ffffff !important;
+  color: #042028 !important;
+  border: 1px solid rgba(16,24,40,0.08) !important;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

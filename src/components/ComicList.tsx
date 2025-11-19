@@ -16,26 +16,28 @@ interface ComicListProps {
 
 const ComicList: React.FC<ComicListProps> = ({ comics, searchQuery, onSelectComic }) => {
   return (
-    <div className="min-h-[calc(100vh-5rem)] pt-6 pb-6 w-full">
-      {/* Optional heading area (currently empty) */}
-      <h1 className="text-3xl font-extrabold text-center mb-6 text-gray-800">
+    <div className="min-h-[calc(100vh-5rem)] pt-6 pb-6 w-full bg-gray-50">
+      {/* Header */}
+      <h1 className="text-3xl font-extrabold text-center mb-8 text-gray-800">
         {/* Title or search-summary could go here */}
       </h1>
 
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1 flex flex-wrap justify-center items-start p-4">
+      <div className="flex-1 flex flex-col px-4">
+        <div className="flex-1">
           {comics.length > 0 ? (
-            comics.map((comic: Comic) => (
-              <ComicCard
-                key={comic.id}
-                imageUrl={comic.imageUrl || ''}
-                title={comic.title}
-                description={comic.description}
-                onClick={() => onSelectComic(comic)}
-              />
-            ))
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+              {comics.map((comic: Comic) => (
+                <ComicCard
+                  key={comic.id}
+                  imageUrl={comic.imageUrl || ''}
+                  title={comic.title}
+                  description={comic.description}
+                  onClick={() => onSelectComic(comic)}
+                />
+              ))}
+            </div>
           ) : (
-            <div className="flex-1 flex items-center justify-center w-full">
+            <div className="flex items-center justify-center w-full h-96">
               <div className="text-center text-gray-500 text-lg">
                 ไม่พบการ์ตูนที่ตรงกับคำค้นหา "{searchQuery}"
               </div>

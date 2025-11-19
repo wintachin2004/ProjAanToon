@@ -16,6 +16,8 @@ export interface Episode {
   title: string
   content: string
   imageUrl?: string
+  imageUrls?: string[]
+  pdfUrl?: string
   // คอมเมนต์
   comments?: Comment[]
 }

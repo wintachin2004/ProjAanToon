@@ -54,14 +54,52 @@ const ComicDetailSection: React.FC<ComicDetailProps> = ({ comic, onBack, onAddCo
         <h2 className="text-3xl font-bold mb-4 text-gray-800">{comic.title}</h2>
         <p className="mb-4 text-gray-600">{comic.description}</p>
 
-        {/* Episode image */}
+        {/* Episode PDF or Images */}
         <div className="mb-6">
-          <img
-            src={selectedEpisode.imageUrl ?? comic.imageUrl}
-            alt={`${comic.title} - ${selectedEpisode.title}`}
-            onError={handleImageError}
-            className="w-full max-h-96 object-cover rounded-lg shadow-sm"
-          />
+          {/* Show image first if available */}
+          {selectedEpisode.imageUrl && (
+            <div className="mb-4">
+              <img
+                src={selectedEpisode.imageUrl}
+                alt={`${comic.title} - ${selectedEpisode.title}`}
+                onError={handleImageError}
+                className="w-full max-h-96 object-cover rounded-lg shadow-sm"
+              />
+            </div>
+          )}
+
+          {/* Then show PDF or additional images */}
+          {selectedEpisode.pdfUrl ? (
+            <div className="w-full bg-gray-100 rounded-lg shadow-sm p-4">
+              <p className="mb-3 text-gray-700 font-semibold"> PDF</p>
+              <iframe
+                src={selectedEpisode.pdfUrl}
+                width="100%"
+                height="600px"
+                style={{ border: 'none', borderRadius: '8px' }}
+              ></iframe>
+              <a
+                href={selectedEpisode.pdfUrl}
+                download
+                className="mt-3 inline-block py-2 px-4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                ดาวน์โหลด PDF
+              </a>
+            </div>
+          ) : selectedEpisode.imageUrls && selectedEpisode.imageUrls.length > 0 ? (
+            <div className="flex flex-col gap-4">
+              {selectedEpisode.imageUrls.map((imageUrl, index) => (
+                <div key={index} className="w-full">
+                  <img
+                    src={imageUrl}
+                    alt={`${comic.title} - ${selectedEpisode.title} - ภาพที่ ${index + 1}`}
+                    onError={handleImageError}
+                    className="w-full h-auto object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* ส่วนเลือกตอน */}

@@ -18,20 +18,22 @@ const ComicCard: React.FC<ComicCardProps> = ({ imageUrl, title, description, onC
   };
 
   return (
-    <div className="w-full sm:w-[calc(50%-1.5rem)] md:w-80 lg:w-72 bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] m-3 flex flex-col">
-      <div className="relative pb-[75%] overflow-hidden bg-gray-200">
+    <div className="w-full max-w-72 bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-2xl hover:scale-105 flex flex-col h-full">
+      {/* Image Container */}
+      <div className="relative w-full pt-[125%] overflow-hidden bg-gray-200">
         <img
-          className="absolute h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
           src={imageUrl}
           alt={`ปกเรื่อง ${title}`}
           onError={handleImageError}
         />
       </div>
 
+      {/* Content Container */}
       <div className="p-4 flex flex-col flex-grow">
         {/* ชื่อและคำอธิบายสั้น - คำอธิบายถูกตัดให้พอดีกับการ์ด */}
-        <h2 className="text-xl font-bold text-gray-800 mb-2 truncate">{title}</h2>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{description}</p>
+        <h2 className="text-lg font-bold text-gray-800 mb-2 truncate">{title}</h2>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">{description}</p>
 
         {/* ปุ่มเปิดหน้ารายละเอียด (การจัดการอยู่ที่ parent) */}
         <button
